@@ -11,13 +11,25 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
   },
+  carouselItem: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    cursor: "pointer",
+    textTransform: "uppercase",
+    color: "#e9e9e9",
+  },
 }));
+
+export function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 const Carousel = () => {
   const [trending, setTrending] = useState([]);
   const classes = useStyles();
 
-  const { currency } = CryptoState();
+  const { currency, symbol } = CryptoState();
 
   const fetchTrendingCoins = async () => {
     const { data } = await axios.get(TrendingCoins(currency));
@@ -36,10 +48,19 @@ const Carousel = () => {
         <span>
           {coin?.symbol}
           &nbsp;
-          <span>
+          <span
+            style={{
+              color: profit > 0 ? "green" : "red",
+              fontWeight: 500,
+            }}
+          >
             {profit && "+"}
             {coin?.price_change_percentage_24h?.toFixed(2)}%
           </span>
+        </span>
+
+        <span>
+          {symbol} {numberWithCommas(coin?.current_price.toFixed(2))}
         </span>
       </Link>
     );
