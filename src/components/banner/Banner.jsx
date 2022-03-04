@@ -11,7 +11,7 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-around",
-    border: "1px solid red",
+    border: "1px solid lightseagreen",
   },
   tagline: {
     display: "flex",
