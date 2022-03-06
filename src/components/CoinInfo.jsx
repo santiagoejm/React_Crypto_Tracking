@@ -8,7 +8,7 @@ import {
   makeStyles,
   ThemeProvider,
 } from "@material-ui/core";
-import SelectButton from "./SelectButton";
+import Button from "./Button";
 import { chartDays } from "../config/data";
 import { CryptoState } from "../context/ContextCrypto";
 
@@ -107,7 +107,7 @@ const CoinInfo = ({ coin }) => {
               }}
             >
               {chartDays.map((day) => (
-                <SelectButton
+                <Button
                   key={day.value}
                   onClick={() => {
                     setDays(day.value);
@@ -116,7 +116,7 @@ const CoinInfo = ({ coin }) => {
                   selected={day.value === days}
                 >
                   {day.label}
-                </SelectButton>
+                </Button>
               ))}
             </div>
           </>
