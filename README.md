@@ -1,6 +1,6 @@
 # React_Crypto_Tracking
 
-Hello world!! This project, is a _crypto currency tracker app_,it is powered by **React.js, MaterialUI, and Chartjs**. The data is fetched from the [CoinGecko](https://www.coingecko.com/en/api) API, making use of **Axios**.
+Hello world!! This project, is a _crypto currency tracker app_,it is powered by **React.js, MaterialUI, and Chartjs**. The data is fetched from the [CoinGecko](https://www.coingecko.com/en/api) API, making use of **Axios**. **ContextAPI** were implemented for handling the state.
 
 In this app, the user can visualized the top 100 Cryptos by market cap, with a pagination of 10 currencies per page. Also, a search bar is deployed so the user can search and filter the tokens by either name or symbol _(example: Bitcoin or BTC)_. A `carousel` is displayed at the top of the home page, where infinetly are looped the tokens with recent changes in their prices. The user can view the prices of the tokens expressed in EUR or USD.
 
