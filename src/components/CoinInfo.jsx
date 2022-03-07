@@ -11,16 +11,17 @@ import {
 import Button from "./Button";
 import { chartDays } from "../config/data";
 import { CryptoState } from "../context/ContextCrypto";
+import { Chart as ChartJS } from "chart.js/auto";
+import { Chart } from "react-chartjs-2";
 
 const CoinInfo = ({ coin }) => {
   const [historicData, setHistoricData] = useState();
   const [days, setDays] = useState(1);
   const { currency } = CryptoState();
-  const [flag, setflag] = useState(false);
 
   const useStyles = makeStyles((theme) => ({
     container: {
-      width: "75%",
+      width: "70%",
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
@@ -40,7 +41,6 @@ const CoinInfo = ({ coin }) => {
 
   const fetchHistoricData = async () => {
     const { data } = await axios.get(HistoricalChart(coin.id, days, currency));
-    setflag(true);
     setHistoricData(data.prices);
   };
 
@@ -48,13 +48,12 @@ const CoinInfo = ({ coin }) => {
 
   useEffect(() => {
     fetchHistoricData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [days]);
+  }, [days, currency]);
 
   const darkTheme = createTheme({
     palette: {
       primary: {
-        main: "#fff",
+        main: "#e1e1e1",
       },
       type: "dark",
     },
@@ -63,9 +62,9 @@ const CoinInfo = ({ coin }) => {
   return (
     <ThemeProvider theme={darkTheme}>
       <div className={classes.container}>
-        {!historicData | (flag === false) ? (
+        {!historicData ? (
           <CircularProgress
-            style={{ color: "gold" }}
+            style={{ color: "lightseagreen" }}
             size={250}
             thickness={1}
           />
@@ -86,7 +85,7 @@ const CoinInfo = ({ coin }) => {
                   {
                     data: historicData.map((coin) => coin[1]),
                     label: `Price ( Past ${days} Days ) in ${currency}`,
-                    borderColor: "#EEBC1D",
+                    borderColor: "lightseagreen",
                   },
                 ],
               }}
@@ -111,7 +110,6 @@ const CoinInfo = ({ coin }) => {
                   key={day.value}
                   onClick={() => {
                     setDays(day.value);
-                    setflag(false);
                   }}
                   selected={day.value === days}
                 >
